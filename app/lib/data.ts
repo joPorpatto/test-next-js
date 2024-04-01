@@ -21,12 +21,11 @@ export async function fetchRevenue() {
     // Don't do this in production :)
 
     console.log('Fetching revenue data...');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
     console.log('Data fetch completed after 3 seconds.');
-
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -171,6 +170,7 @@ export async function fetchInvoiceById(id: string) {
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
     }));
+    console.log(invoice); // Invoice is an empty array []
 
     return invoice[0];
   } catch (error) {
